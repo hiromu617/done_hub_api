@@ -1,4 +1,4 @@
 class DonePost < ApplicationRecord
-  belongs_to :user
   attr_accessor :uid
+  belongs_to :user
 end

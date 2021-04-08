@@ -1,5 +1,8 @@
 class Api::DonePostsController < ApplicationController
   # protect_from_forgery
+  def index
+    @donePost = DonePost.all.order(created_at: "DESC")
+  end
   
   def create
     # binding.pry
