@@ -13,18 +13,28 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    @user = User.find_or_initialize_by(user_params)
-    # binding.pry
-    if @user.save
+      # binding.pry
+    @user = User.find_by(uid: user_params[:uid])
+    if @user
       render json: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      @user = User.create(user_params)
+      # binding.pry
+      if @user.save
+        render json: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     end
+    
   end
 
   def update
-    @user = User.find_by(id: params[:id])
     # binding.pry
+    @user = User.find_by(uid: params[:uid])
+    if !@user 
+      return 
+    end
     if @user.update(user_params)
       render json: @user
     else
@@ -35,7 +45,7 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :uid)
+    params.require(:user).permit(:name, :uid, :profile)
   end
 
 end
