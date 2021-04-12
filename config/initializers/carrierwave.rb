@@ -3,6 +3,7 @@ require 'carrierwave/storage/file'
 require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
+    config.asset_host = 'http://localhost:3000'
     config.storage :fog
     config.fog_provider = 'fog/aws'
     config.fog_directory  = 'done-hub-avatar' # 作成したバケット名を記述
