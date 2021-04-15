@@ -7,9 +7,15 @@ class Api::UsersController < ApplicationController
   end
 
   def show
+    @currentUser = User.find_by(uid: params[:currentUserUid])
+    @user = User.find_by(uid: params[:uid])
+    render json:  {user: @user, following: @user.following, follower: @user.followers, isFollowed: @currentUser.following?(@user) }
+  end
+
+  def following
     # binding.pry
     @user = User.find_by(uid: params[:uid])
-    render json: @user
+    render json: {following: @user.following, follower: @user.followers }
   end
 
   def create

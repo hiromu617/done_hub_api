@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   post 'api/done_posts/:uid', to: "api/done_posts#create"
   post 'api/users/:uid', to: "api/users#update"
   get 'api/users/:uid', to: "api/users#show"
+  get 'api/users/following/:uid', to: "api/users#following"
+  get 'api/relationships/', to: "api/relationships#create"
 
   namespace :api do
     resources :users
-    resources :done_posts
+    resources :done_posts 
+    resources :relationships, only: [:destroy]
   end
 end
