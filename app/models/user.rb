@@ -14,6 +14,15 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  has_many :likes, dependent: :destroy
+
+  def feed
+    following_ids = "SELECT followed_id FROM relationships
+    WHERE follower_id = :user_id"
+    DonePost.where("user_id IN (#{following_ids})
+    OR user_id = :user_id", user_id: id)
+  end
+
   # ユーザーをフォローする
   def follow(other_user)
     following << other_user
