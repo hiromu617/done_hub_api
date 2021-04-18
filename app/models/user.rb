@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   validates :name, presence: true
   validates :uid, presence: true
-  mount_uploader :avatar, AvatarUploader
   has_many :done_posts, dependent: :destroy
   has_many :replys, dependent: :destroy
 
