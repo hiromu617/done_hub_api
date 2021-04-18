@@ -24,6 +24,8 @@ class Api::DonePostsController < ApplicationController
     end
   end
 
+  private
+  
   def done_post_params
     params.require(:done_post).permit(:title, :uid, :comment)
   end

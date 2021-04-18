@@ -3,6 +3,7 @@ class User < ApplicationRecord
   validates :uid, presence: true
   mount_uploader :avatar, AvatarUploader
   has_many :done_posts, dependent: :destroy
+  has_many :replys, dependent: :destroy
 
   has_many :active_relationships, class_name:  "Relationship",
   foreign_key: "follower_id",

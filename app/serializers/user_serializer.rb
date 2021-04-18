@@ -3,4 +3,5 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :done_posts
   # has_many :rerationships
+  has_many :replys
 end
