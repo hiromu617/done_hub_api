@@ -4,7 +4,12 @@ class Api::DonePostsController < ApplicationController
     # binding.pry
     @user = User.find_by(uid: params[:uid])
     @donePost = DonePost.where(user_id: @user.id).order(created_at: "DESC").page(params[:page]).per(5)
-    render json: @donePost
+    render json: @donePost, include: ['user', 'likes' ,'replys.user']
+  end
+
+  def show
+    @donePost = DonePost.find(params[:id])
+    render json: @donePost, include: ['user', 'likes' ,'replys.user']
   end
   
   def create

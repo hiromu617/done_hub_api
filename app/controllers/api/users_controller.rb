@@ -2,7 +2,7 @@ class Api::UsersController < ApplicationController
   # protect_from_forgery
   def showFeed
     @user = User.find_by(uid: params[:uid])
-    render json: @user.feed.order(created_at: "DESC").page(params[:page]).per(10)
+    render json: @user.feed.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user']
   end
   def index
     @users = User.all

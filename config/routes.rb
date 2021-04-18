@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     resources :done_posts 
     resources :relationships, only: [:destroy]
     resources :likes, only: [:create, :destroy]
+    resources :replys, only: [:create, :destroy]
   end
 end
