@@ -13,12 +13,30 @@ class Api::DonePostsController < ApplicationController
   end
   
   def create
-    # binding.pry
     @donePost = DonePost.new(
       title: done_post_params[:title],
-      comment: done_post_params[:comment])
+      comment: done_post_params[:comment],
+      tasks: [done_post_params[:tasks]]
+    )
 
-    @user = User.find_by(uid: done_post_params[:uid])
+    @user = User.find_by(uid: params[:uid])
+
+    @donePost.user_id = @user.id
+
+    if @donePost.save
+      render json: @donePost
+    else
+      render json: @donePost.errors, status: :unprocessable_entity
+    end
+  end
+
+  def createList
+    @donePost = DonePost.new(
+      comment: params[:comment],
+      tasks: params[:tasks]
+    )
+
+    @user = User.find_by(uid: params[:uid])
 
     @donePost.user_id = @user.id
 
@@ -32,7 +50,7 @@ class Api::DonePostsController < ApplicationController
   private
   
   def done_post_params
-    params.require(:done_post).permit(:title, :uid, :comment)
+    params.require(:done_post).permit(:tasks, :title, :uid, :comment)
   end
 
 end
