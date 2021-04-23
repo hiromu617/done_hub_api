@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'api/users/:uid', to: "api/users#show"
   get 'api/users/:uid/feed', to: "api/users#showFeed"
   get 'api/users/:uid/feed_by_hub', to: "api/users#showFeedByHub"
+  get 'api/users/:uid/hubs', to: "api/users#updateHub"
   get 'api/users/following/:uid', to: "api/users#following"
   get 'api/relationships/', to: "api/relationships#create"
   delete 'api/likes/', to: "api/likes#destroy"

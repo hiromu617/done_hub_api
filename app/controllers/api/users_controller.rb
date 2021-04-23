@@ -12,6 +12,17 @@ class Api::UsersController < ApplicationController
     render json: @donePosts.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user']
   end
 
+  def updateHub
+    @user = User.find_by(uid: params[:uid])
+    @user.hub_list = params[:hub_list]
+    
+    if @user.save
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
   def search
     @q = User.ransack(name_cont: params[:q])
     @users = @q.result(distinct: true)
