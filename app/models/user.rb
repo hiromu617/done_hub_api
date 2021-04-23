@@ -15,7 +15,8 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   has_many :likes, dependent: :destroy
-
+  acts_as_taggable_on :hubs
+  
   def feed
     following_ids = "SELECT followed_id FROM relationships
     WHERE follower_id = :user_id"
