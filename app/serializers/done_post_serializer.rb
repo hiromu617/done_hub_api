@@ -4,4 +4,5 @@ class DonePostSerializer < ActiveModel::Serializer
   belongs_to :user
   has_many :likes
   has_many :replys
+  has_many :notifications
 end

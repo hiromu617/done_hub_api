@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   acts_as_taggable_on :hubs
   
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
+
   def feed
     following_ids = "SELECT followed_id FROM relationships
     WHERE follower_id = :user_id"

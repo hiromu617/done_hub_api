@@ -4,4 +4,5 @@ class DonePost < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :replys, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
+  has_many :notifications, dependent: :destroy
 end
