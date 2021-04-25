@@ -12,6 +12,13 @@ class Api::UsersController < ApplicationController
     render json: @donePosts.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user']
   end
 
+  def showFeedBySelectedHub
+    binding.pry
+    @ids = User.tagged_with(params[:hub_list], :any => true).ids
+    @donePosts = DonePost.where(user_id: @ids)
+    render json: @donePosts.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user']
+  end
+
   def updateHub
     @user = User.find_by(uid: params[:uid])
     @user.hub_list = params[:hub_list]
