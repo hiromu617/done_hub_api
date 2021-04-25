@@ -1,5 +1,5 @@
 class CreateNotifications < ActiveRecord::Migration[6.0]
   def change
-    drop_table :notifications
+    # drop_table :notifications
   end
 end
