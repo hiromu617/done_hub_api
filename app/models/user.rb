@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   validates :name, presence: true
-  validates :uid, presence: true
+  validates :uid, presence: true, uniqueness: true
   has_many :done_posts, dependent: :destroy
   has_many :replys, dependent: :destroy
 

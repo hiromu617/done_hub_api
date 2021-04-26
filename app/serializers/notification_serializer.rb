@@ -1,5 +1,5 @@
 class NotificationSerializer < ActiveModel::Serializer
-  attributes :action
+  attributes :action, :id
   belongs_to :done_post
-  belongs_to :visited ,serializer: UserSerializer
+  belongs_to :visiter ,serializer: UserSerializer
 end

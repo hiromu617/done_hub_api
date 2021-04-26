@@ -20,6 +20,7 @@ class Api::UsersController < ApplicationController
   end
 
   def updateHub
+    binding.pry
     @user = User.find_by(uid: params[:uid])
     @user.hub_list = params[:hub_list]
     

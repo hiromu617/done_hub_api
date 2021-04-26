@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_054959) do
+ActiveRecord::Schema.define(version: 2021_04_25_132245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,15 +91,6 @@ ActiveRecord::Schema.define(version: 2021_04_25_054959) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "todos", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.text "comment"
-    t.json "tasks", array: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_todos_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "uid"
@@ -113,5 +104,4 @@ ActiveRecord::Schema.define(version: 2021_04_25_054959) do
   add_foreign_key "replies", "done_posts"
   add_foreign_key "replies", "users"
   add_foreign_key "taggings", "tags"
-  add_foreign_key "todos", "users"
 end
