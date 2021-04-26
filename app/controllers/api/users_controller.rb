@@ -57,10 +57,10 @@ class Api::UsersController < ApplicationController
   def create
       # binding.pry
     @user = User.find_by(uid: user_params[:uid])
-    if @user
+    if !@user.nil?
       render json: @user
     else
-      @user = User.create(user_params)
+      @user = User.new(user_params)
       # binding.pry
       if @user.save
         render json: @user
