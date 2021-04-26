@@ -30,6 +30,11 @@ class Api::DonePostsController < ApplicationController
     end
   end
 
+  def delete
+    @donePost = DonePost.find(params[:id])
+    @donePost.destroy
+  end
+
   def createList
     @donePost = DonePost.new(
       comment: params[:comment],
