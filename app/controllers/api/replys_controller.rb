@@ -19,7 +19,7 @@ class Api::ReplysController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @reply = Reply.find(params[:id])
     @reply.destroy
   end

@@ -30,7 +30,7 @@ class Api::DonePostsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @donePost = DonePost.find(params[:id])
     @donePost.destroy
   end
