@@ -60,12 +60,12 @@ class Api::UsersController < ApplicationController
     if !@user.nil?
       render json: @user
     else
-      @user = User.new(user_params)
+      @newUser = User.new(user_params)
       # binding.pry
-      if @user.save
-        render json: @user
+      if @newUser.save
+        render json: @newUser
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: @userUser.errors, status: :unprocessable_entity
       end
     end
     
