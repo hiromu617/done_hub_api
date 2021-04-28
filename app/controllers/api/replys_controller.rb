@@ -6,7 +6,7 @@ class Api::ReplysController < ApplicationController
 
     @current_user = User.find(reply_params[:user_id])
     
-    if(@current_user.id !== @donePost.user_id)
+    if(@current_user.id != @donePost.user_id)
       @current_user.active_notifications.create(
         done_post_id:  @donePost.id,
         visited_id: @donePost.user_id,
