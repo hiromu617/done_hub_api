@@ -5,11 +5,14 @@ class Api::LikesController < ApplicationController
 
     @current_user = User.find(like_params[:user_id])
     
-    @current_user.active_notifications.create(
-      done_post_id:  @donePost.id,
-      visited_id: @donePost.user_id,
-      action: "like"
-    )
+    if(@current_user.id !== @donePost.user_id)
+      @current_user.active_notifications.create(
+        done_post_id:  @donePost.id,
+        visited_id: @donePost.user_id,
+        action: "like"
+      )
+    end
+    
 
     render json: @donePost.likes
   end
