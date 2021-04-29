@@ -13,14 +13,14 @@ class Api::UsersController < ApplicationController
   end
 
   def showFeedBySelectedHub
-    binding.pry
+    # binding.pry
     @ids = User.tagged_with(params[:hub_list], :any => true).ids
     @donePosts = DonePost.where(user_id: @ids)
     render json: @donePosts.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user']
   end
 
   def updateHub
-    binding.pry
+    # binding.pry
     @user = User.find_by(uid: params[:uid])
     @user.hub_list = params[:hub_list]
     
@@ -58,12 +58,12 @@ class Api::UsersController < ApplicationController
       # binding.pry
     @user = User.find_by(uid: user_params[:uid])
     if !@user.nil?
-      render json: @user
+      render json: {user: @user, newUser: false}
     else
       @newUser = User.new(user_params)
       # binding.pry
       if @newUser.save
-        render json: @newUser
+        render json: {user: @newUser, newUser: true}
       else
         render json: @userUser.errors, status: :unprocessable_entity
       end
