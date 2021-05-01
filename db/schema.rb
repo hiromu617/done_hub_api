@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_04_29_091234) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "uid"
+    t.string "uid", unique: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "profile"

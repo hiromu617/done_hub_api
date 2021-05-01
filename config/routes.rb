@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'api/users/:uid', to: "api/users#update"
   get 'api/users/search', to: "api/users#search"
   get 'api/users/:uid', to: "api/users#show"
+  get 'api/usersShow/:uid', to: "api/users#showUser"
   get 'api/users/:uid/feed', to: "api/users#showFeed"
   get 'api/users/:uid/feed_by_hub', to: "api/users#showFeedByHub"
   get 'api/users/:uid/hubs', to: "api/users#updateHub"

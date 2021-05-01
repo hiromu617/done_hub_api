@@ -21,6 +21,12 @@ class Api::UsersController < ApplicationController
 
   def updateHub
     # binding.pry
+    @users = User.where(uid: params[:uid])
+    if @users.count > 1
+      (@users.count - 1).times do
+        @users[0].destroy        
+      end
+    end
     @user = User.find_by(uid: params[:uid])
     @user.hub_list = params[:hub_list]
     
@@ -54,20 +60,28 @@ class Api::UsersController < ApplicationController
     render json: {following: @user.following, follower: @user.followers }
   end
 
+  def showUser
+    @user = User.find_by(uid: params[:uid])
+    render json: @user
+  end
+
   def create
       # binding.pry
-    @user = User.find_by(uid: user_params[:uid])
-    if !@user.nil?
-      render json: {user: @user, newUser: false}
-    else
+    # @users = User.where(uid: user_params[:uid])
+    # if !@users.nil?
+    #   @users.each do |u|
+    #     u.destroy        
+    #   end
+    # end
+
       @newUser = User.new(user_params)
       # binding.pry
       if @newUser.save
-        render json: {user: @newUser, newUser: true}
+        render json: @newUser
       else
         render json: @userUser.errors, status: :unprocessable_entity
       end
-    end
+    # end
     
   end
 
