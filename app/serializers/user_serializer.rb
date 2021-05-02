@@ -5,4 +5,5 @@ class UserSerializer < ActiveModel::Serializer
   # has_many :rerationships
   has_many :replys
   # has_many :notifications
+  has_many :likes
 end

@@ -2,21 +2,21 @@ class Api::UsersController < ApplicationController
   # protect_from_forgery
   def showFeed
     @user = User.find_by(uid: params[:uid])
-    render json: @user.feed.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user']
+    render json: @user.feed.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user', 'likes.user']
   end
 
   def showFeedByHub
     @user = User.find_by(uid: params[:uid])
     @ids = User.tagged_with(@user.hub_list, :any => true).ids
     @donePosts = DonePost.where(user_id: @ids)
-    render json: @donePosts.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user']
+    render json: @donePosts.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user', 'likes.user']
   end
 
   def showFeedBySelectedHub
     # binding.pry
     @ids = User.tagged_with(params[:hub_list], :any => true).ids
     @donePosts = DonePost.where(user_id: @ids)
-    render json: @donePosts.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user']
+    render json: @donePosts.order(created_at: "DESC").page(params[:page]).per(10), include: ['user', 'likes' ,'replys.user', 'likes.user']
   end
 
   def updateHub
