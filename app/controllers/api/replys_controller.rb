@@ -13,8 +13,17 @@ class Api::ReplysController < ApplicationController
         action: "reply"
       )
     end
-    
 
+    @donePost.replys.each do |reply|
+      if @current_user.id != reply.user_id
+        @current_user.active_notifications.create(
+          done_post_id:  @donePost.id,
+          visited_id: reply.user_id,
+          action: "reply"
+        )
+      end
+    end
+    
     if @reply.save
       render json: @reply
     else
