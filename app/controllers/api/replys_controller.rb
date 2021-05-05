@@ -15,7 +15,7 @@ class Api::ReplysController < ApplicationController
     end
 
     @donePost.replys.each do |reply|
-      if @current_user.id != reply.user_id
+      if @current_user.id != reply.user_id && reply.user_id != @donePost.user_id
         @current_user.active_notifications.create(
           done_post_id:  @donePost.id,
           visited_id: reply.user_id,
