@@ -62,7 +62,11 @@ class Api::UsersController < ApplicationController
 
   def showUser
     @user = User.find_by(uid: params[:uid])
-    render json: @user
+    if @user
+      render json: @user
+    else
+      render json: nil
+    end
   end
 
   def create
