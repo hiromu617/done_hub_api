@@ -11,12 +11,14 @@ Rails.application.routes.draw do
   get 'api/users/:uid/hubs', to: "api/users#updateHub"
   get 'api/users/following/:uid', to: "api/users#following"
   get 'api/relationships/', to: "api/relationships#create"
+  get 'api/blocks/', to: "api/blocks#create"
   delete 'api/likes/', to: "api/likes#destroy"
 
   namespace :api do
     resources :users
     resources :done_posts 
     resources :relationships, only: [:destroy]
+    resources :blocks, only: [:destroy]
     resources :likes, only: [:create, :destroy]
     resources :replys, only: [:create, :destroy]
     resources :notifications, only: :index

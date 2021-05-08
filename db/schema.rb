@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_29_091234) do
+ActiveRecord::Schema.define(version: 2021_05_08_084148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "block_id"
+    t.integer "blocked_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["block_id", "blocked_id"], name: "index_blocks_on_block_id_and_blocked_id", unique: true
+    t.index ["block_id"], name: "index_blocks_on_block_id"
+  end
 
   create_table "done_posts", force: :cascade do |t|
     t.text "title"
@@ -93,7 +102,7 @@ ActiveRecord::Schema.define(version: 2021_04_29_091234) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "uid", unique: true
+    t.string "uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "profile"

@@ -21,6 +21,9 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
+  has_many :blocks, class_name:  "Block", foreign_key: "block_id", dependent:   :destroy
+  has_many :block_users, through: :blocks, source: :blocked
+
   def feed
     following_ids = "SELECT followed_id FROM relationships
     WHERE follower_id = :user_id"
@@ -41,5 +44,20 @@ class User < ApplicationRecord
   # 現在のユーザーがフォローしてたらtrueを返す
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  # ユーザーをブロックする
+  def block(other_user)
+    block_users << other_user
+  end
+  
+  # ユーザーをブロック解除する
+  def unblock(other_user)
+    blocks.find_by(blocked_id: other_user.id).destroy
+  end
+
+  # 現在のユーザーがブロックしてたらtrueを返す
+  def block?(other_user)
+    block_users.include?(other_user)
   end
 end

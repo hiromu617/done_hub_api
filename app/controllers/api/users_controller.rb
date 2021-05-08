@@ -51,13 +51,13 @@ class Api::UsersController < ApplicationController
   def show
     @currentUser = User.find_by(uid: params[:currentUserUid])
     @user = User.find_by(uid: params[:uid])
-    render json:  {user: @user, following: @user.following, follower: @user.followers, isFollowed: @currentUser.following?(@user), done_counts:  @user.done_posts.where.not(title: nil).count}
+    render json:  {user: @user, following: @user.following, follower: @user.followers, isFollowed: @currentUser.following?(@user), blockState: {block: @currentUser.block?(@user), blocked: @user.block?(@currentUser)}, done_counts:  @user.done_posts.where.not(title: nil).count}
   end
 
   def following
     # binding.pry
     @user = User.find_by(uid: params[:uid])
-    render json: {following: @user.following, follower: @user.followers, done_counts:  @user.done_posts.where.not(title: nil).count}
+    render json: {following: @user.following, follower: @user.followers, done_counts:  @user.done_posts.where.not(title: nil).count, block_users: @user.block_users}
   end
 
   def showUser

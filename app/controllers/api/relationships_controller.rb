@@ -4,6 +4,11 @@ class Api::RelationshipsController < ApplicationController
     # binding.pry
     @current_user = User.find_by(uid: params[:currentUserUid])
     @user = User.find(params[:id])
+
+    if(@user.block(@current_user) || @current_user.block(@user))
+      return
+    end
+
     if(@current_user.id != @user.id)
       @current_user.active_notifications.create(
         visited_id: @user.id,
