@@ -5,7 +5,7 @@ class Api::RelationshipsController < ApplicationController
     @current_user = User.find_by(uid: params[:currentUserUid])
     @user = User.find(params[:id])
 
-    if(@user.block(@current_user) || @current_user.block(@user))
+    if(@user.block?(@current_user) || @current_user.block?(@user))
       return
     end
 
