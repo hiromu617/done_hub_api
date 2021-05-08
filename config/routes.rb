@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'api/users/following/:uid', to: "api/users#following"
   get 'api/relationships/', to: "api/relationships#create"
   get 'api/blocks/', to: "api/blocks#create"
+  get 'api/latest_users/', to: "api/users#latestUsers"
   delete 'api/likes/', to: "api/likes#destroy"
 
   namespace :api do

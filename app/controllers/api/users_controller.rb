@@ -37,6 +37,10 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def latestUsers
+    render json: User.last(5), include: []
+  end
+
   def search
     @q = User.ransack(name_cont: params[:q])
     @users = @q.result(distinct: true)
