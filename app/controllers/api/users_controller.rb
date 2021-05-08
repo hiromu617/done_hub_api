@@ -38,7 +38,7 @@ class Api::UsersController < ApplicationController
   end
 
   def latestUsers
-    render json: User.last(5), include: []
+    render json: User.last(3), include: []
   end
 
   def search
