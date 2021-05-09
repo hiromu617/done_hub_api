@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :uid, :profile, :hub_list
+  attributes :id, :name, :uid, :profile, :hub_list, :expo_push_token
 
   has_many :done_posts
   # has_many :rerationships

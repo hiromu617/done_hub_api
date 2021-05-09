@@ -67,6 +67,12 @@ class Api::UsersController < ApplicationController
   def showUser
     @user = User.find_by(uid: params[:uid])
     if @user
+
+      if params[:expo_push_token] != nil && @user.expo_push_token != '' && @user.expo_push_token != params[:expo_push_token]
+        @user.expo_push_token = params[:expo_push_token]
+        @user.save
+      end
+
       render json: @user
     else
       render json: nil
@@ -109,7 +115,7 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :uid, :profile)
+    params.require(:user).permit(:name, :uid, :profile, :expo_push_token)
   end
 
 end
