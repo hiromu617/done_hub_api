@@ -68,7 +68,7 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(uid: params[:uid])
     if @user
 
-      if params[:expo_push_token] != nil && @user.expo_push_token != '' && @user.expo_push_token != params[:expo_push_token]
+      if params[:expo_push_token] != nil && (@user.expo_push_token != '' || @user.expo_push_token != params[:expo_push_token])
         @user.expo_push_token = params[:expo_push_token]
         @user.save
       end
