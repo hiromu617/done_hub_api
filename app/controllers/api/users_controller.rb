@@ -116,7 +116,7 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(uid: params[:uid])
     start_date =Time.zone.now.beginning_of_month
     end_date =Time.zone.now
-    render json: @user.done_posts.where(created_at: start_date..end_date).group('DATE(created_at)').count
+    render json: @user.done_posts.where.not(title: nil).where(created_at: start_date..end_date).group('DATE(created_at)').count
   end
 
   private
