@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'api/blocks/', to: "api/blocks#create"
   get 'api/latest_users/', to: "api/users#latestUsers"
   delete 'api/likes/', to: "api/likes#destroy"
+  get 'api/notifications_count/:uid', to: "api/notifications#count"
 
   namespace :api do
     resources :users
@@ -22,6 +23,6 @@ Rails.application.routes.draw do
     resources :blocks, only: [:destroy]
     resources :likes, only: [:create, :destroy]
     resources :replys, only: [:create, :destroy]
-    resources :notifications, only: :index
+    resources :notifications, only: [:index, :update]
   end
 end
