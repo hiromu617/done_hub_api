@@ -31,7 +31,7 @@ class Api::UsersController < ApplicationController
     @user.hub_list = params[:hub_list]
     
     if @user.save
-      render json: @user
+      render json: @user, include: []
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -91,7 +91,7 @@ class Api::UsersController < ApplicationController
       @newUser = User.new(user_params)
       # binding.pry
       if @newUser.save
-        render json: @newUser
+        render json: @newUser, include: []
       else
         render json: @userUser.errors, status: :unprocessable_entity
       end
@@ -106,7 +106,7 @@ class Api::UsersController < ApplicationController
       return 
     end
     if @user.update(user_params)
-      render json: @user
+      render json: @user, include: []
     else
       render json: @user.errors, status: :unprocessable_entity
     end
