@@ -73,7 +73,7 @@ class Api::UsersController < ApplicationController
         @user.save
       end
 
-      render json: @user
+      render json: @user, include: []
     else
       render json: nil
     end
