@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'api/latest_users/', to: "api/users#latestUsers"
   delete 'api/likes/', to: "api/likes#destroy"
   get 'api/notifications_count/:uid', to: "api/notifications#count"
+  get 'api/done_log/:uid', to: "api/users#showDoneLog"
 
   namespace :api do
     resources :users
