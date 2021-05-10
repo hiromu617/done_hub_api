@@ -10,8 +10,8 @@ class Api::NotificationsController < ApplicationController
     @notification = Notification.find(params[:id])
     @notification.update_attributes(checked: true)
 
-    @currentUser = User.find_by(id: @notification.visited_id)
-    render json: @currentUser.passive_notifications.where(checked: false).count
+    # @currentUser = User.find_by(id: @notification.visited_id)
+    # render json: @currentUser.passive_notifications.where(checked: false).count
   end
 
   def count
