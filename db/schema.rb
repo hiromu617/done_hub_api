@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_100613) do
+ActiveRecord::Schema.define(version: 2021_06_13_075755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,9 @@ ActiveRecord::Schema.define(version: 2021_05_09_100613) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "profile"
     t.string "expo_push_token", default: ""
+    t.string "college", default: ""
+    t.string "faculty", default: ""
+    t.string "department", default: ""
     t.index ["id", "uid"], name: "index_users_on_id_and_uid", unique: true
   end
 

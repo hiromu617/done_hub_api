@@ -100,7 +100,6 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    # binding.pry
     @user = User.find_by(uid: params[:uid])
     if !@user 
       return 
@@ -122,7 +121,7 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :uid, :profile, :expo_push_token)
+    params.require(:user).permit(:name, :uid, :profile, :expo_push_token,:college,:faculty,:department)
   end
 
 end
